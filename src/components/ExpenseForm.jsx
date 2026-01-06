@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function ExpenseForm() {
+function ExpenseForm({ addTransaction }) {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('expense');
   const [description, setDescription] = useState('');
@@ -8,13 +8,26 @@ function ExpenseForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ amount, category, description, date });
-  };
 
+    const transaction = {
+      amount: parseFloat(amount),
+      category,
+      description,
+      date
+    };
+
+    addTransaction(transaction);
+
+    // Clear form
+    setAmount('');
+    setCategory('expense');
+    setDescription('');
+    setDate('');
+  };
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-6">
       <h2 className="text-2xl font-semibold mb-4">Add Transaction</h2>
-      
+
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 mb-2">Amount</label>
