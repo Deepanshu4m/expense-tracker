@@ -1,7 +1,14 @@
+import Header from './components/Header';
+import ExpenseForm from './components/ExpenseForm';
+
 function App() {
   return (
     <div className="min-h-screen bg-gray-100">
-      <h1>Expense Tracker</h1>
+      <Header />
+      
+      <main className="container mx-auto px-4 py-8">
+        <ExpenseForm />
+      </main>
     </div>
   )
 }
