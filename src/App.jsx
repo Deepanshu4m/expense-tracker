@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
+import Summary from './components/Summary';
 import { saveToLocalStorage, getFromLocalStorage } from './utils/localStorage';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
 
-  // Load transactions from localStorage when app starts
   useEffect(() => {
     const savedTransactions = getFromLocalStorage('transactions');
     if (savedTransactions) {
@@ -15,7 +15,6 @@ function App() {
     }
   }, []);
 
-  // Save transactions to localStorage whenever they change
   useEffect(() => {
     saveToLocalStorage('transactions', transactions);
   }, [transactions]);
@@ -32,7 +31,8 @@ function App() {
     <div className="min-h-screen bg-gray-100">
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        <Summary transactions={transactions} />
         <ExpenseForm addTransaction={addTransaction} />
         <ExpenseList transactions={transactions} />
       </main>
